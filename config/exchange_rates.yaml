@@ -1,0 +1,5 @@
+excahnge_rates:
+  available_currencies:
+    - USD
+    - EUR
+    - GBP

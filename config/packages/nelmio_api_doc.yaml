@@ -1,0 +1,11 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Mintos Homework API
+            description: Mintos Homework API documentation
+            version: 1.0.0
+    areas:
+        path_patterns:
+            - ^/rest
+    models:
+        use_jms: true

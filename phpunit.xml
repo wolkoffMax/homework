@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="tests/bootstrap.php" allow-test-doubles-for-final-classes="true">
+  <testsuites>
+    <testsuite name="Tests">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory>src/</directory>
+    </include>
+    <exclude>
+        <directory>src/Account/Infrastructure/Controller/</directory>
+        <directory>src/Client/Infrastructure/Controller/</directory>
+        <directory>src/Transaction/Infrastructure/Controller/</directory>
+
+        <directory>src/Account/Infrastructure/Orm/</directory>
+        <directory>src/Client/Infrastructure/Orm/</directory>
+        <directory>src/Transaction/Infrastructure/Orm/</directory>
+        <directory>src/CurrencyRate/Infrastructure/Orm/</directory>
+
+        <directory>src/Account/Domain/</directory>
+        <directory>src/Client/Domain/</directory>
+        <directory>src/Transaction/Domain/</directory>
+        <directory>src/CurrencyRate/Domain/</directory>
+    </exclude>
+  </source>
+</phpunit>

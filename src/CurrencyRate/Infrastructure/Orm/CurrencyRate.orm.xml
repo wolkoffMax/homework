@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+<entity name="App\CurrencyRate\Domain\CurrencyRate" table="currency_rates" repository-class="App\CurrencyRate\Infrastructure\Repository\OrmCurrencyRateRepository">
+    <id name="id" type="uuid" column="id" />
+    <field name="baseCurrency" type="string" column="base_currency" length="3"/>
+    <field name="targetCurrency" type="string" column="target_currency" length="3"/>
+    <field name="rate" type="float" column="rate"/>
+    <field name="conversionDate" type="datetime_immutable" column="conversion_date"/>
+    <field name="createdAt" type="datetime_immutable" column="created_at"/>
+    <field name="updatedAt" type="datetime_immutable" column="updated_at" nullable="true"/>
+
+    <indexes>
+        <index name="idx_currency_rate_bse_currency_target_currency" columns="base_currency,target_currency"/>
+    </indexes>
+
+    <lifecycle-callbacks>
+        <lifecycle-callback type="prePersist" method="prePersist"/>
+    </lifecycle-callbacks>
+</entity>
+</doctrine-mapping>

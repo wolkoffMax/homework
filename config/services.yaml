@@ -1,0 +1,44 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Account/Domain/'
+            - '../src/Client/Domain/'
+            - '../src/Shared/Domain/'
+            - '../src/transaction/Domain/'
+            - '../src/Shared/Infrastructure/Kernel.php'
+
+#    Client
+    App\Client\Domain\ClientRepository:
+        class: App\Client\Infrastructure\Orm\Repository\OrmClientRepository
+
+#   Account
+    App\Account\Domain\AccountRepository:
+        class: App\Account\Infrastructure\Orm\Repository\OrmAccountRepository
+
+#   Transaction
+    App\Transaction\Domain\TransactionRepository:
+        class: App\Transaction\Infrastructure\Orm\Repository\OrmTransactionRepository
+
+    App\Transaction\Application\EventListener\CreateTransactionEventListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'App\Account\Application\Event\AccountBalanceUpdated', method: 'onAccountBalanceUpdated' }
+
+#   CurrencyRate
+    App\CurrencyRate\Domain\CurrencyRateRepository:
+        class: App\CurrencyRate\Infrastructure\Orm\Repository\OrmCurrencyRateRepository
+
+    App\CurrencyRate\Application\EventListener\ProcessCurrencyRateEventListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'App\CurrencyRate\Domain\Event\NewCurrencyRateReceived', method: 'onNewCurrencyRateReceived'}
+
+# Shared
+    App\Shared\Infrastructure\CurrencyConverter\Client\CurrencyConversionHttpClient:
+        factory: [ '@App\Shared\Infrastructure\CurrencyConverter\Client\CurrencyConversionHttpClientFactory', 'create' ]
+
+    App\Shared\Application\CurrencyConverter\CurrencyConverter:
+        class: App\Shared\Infrastructure\CurrencyConverter\CurrencyConverterFactory
