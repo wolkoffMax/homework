@@ -1,4 +1,4 @@
-# Mintos Homework API
+# Homework API
 
 ## Installation
 
